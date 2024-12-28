@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DeepSeek Shortcut Installer</title>
+    <title>DeepSeek 快捷指令安装</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -9,73 +9,37 @@
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             padding: 20px;
             text-align: center;
+            background: #f5f5f7;
+        }
+        h1 {
+            color: #1d1d1f;
+            font-size: 2em;
+            margin: 40px 0;
+        }
+        p {
+            color: #515154;
+            margin: 20px 0;
         }
         .button {
             display: inline-block;
-            padding: 12px 24px;
+            padding: 15px 30px;
             background: #007AFF;
             color: white;
             text-decoration: none;
-            border-radius: 8px;
-            margin: 20px 0;
+            border-radius: 20px;
+            font-size: 1.2em;
+            margin: 30px 0;
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            background: #0066CC;
+            transform: scale(1.05);
         }
     </style>
-    <script>
-        function installShortcut() {
-            var shortcutData = {
-                "WFWorkflowActions": [
-                    {
-                        "WFWorkflowActionIdentifier": "is.workflow.actions.gettext",
-                        "WFWorkflowActionParameters": {
-                            "WFTextActionText": "获取语音输入"
-                        }
-                    },
-                    {
-                        "WFWorkflowActionIdentifier": "is.workflow.actions.downloadurl",
-                        "WFWorkflowActionParameters": {
-                            "url": "https://api.deepseek.ai/v1/chat/completions",
-                            "method": "POST",
-                            "headers": {
-                                "Content-Type": "application/json",
-                                "Authorization": "Bearer sk-2848ebb86c1e49a4ac8854498021fd15"
-                            },
-                            "body": {
-                                "model": "deepseek-chat-v1",
-                                "messages": [
-                                    {
-                                        "role": "user",
-                                        "content": "{{WFTextActionText}}"
-                                    }
-                                ],
-                                "temperature": 0.7
-                            }
-                        }
-                    },
-                    {
-                        "WFWorkflowActionIdentifier": "is.workflow.actions.getvalueforkey",
-                        "WFWorkflowActionParameters": {
-                            "WFDictionaryKey": "choices.0.message.content"
-                        }
-                    },
-                    {
-                        "WFWorkflowActionIdentifier": "is.workflow.actions.speaktext"
-                    }
-                ],
-                "WFWorkflowName": "DeepSeek助手",
-                "WFWorkflowIcon": {
-                    "WFWorkflowIconGlyphNumber": 59511,
-                    "WFWorkflowIconStartColor": 4282601983
-                }
-            };
-            
-            var base64Data = btoa(JSON.stringify(shortcutData));
-            window.location.href = "shortcuts://import-shortcut?url=data:text/shortcut;base64," + base64Data;
-        }
-    </script>
 </head>
 <body>
     <h1>DeepSeek 快捷指令安装</h1>
     <p>点击下面的按钮安装 DeepSeek 语音助手快捷指令</p>
-    <a href="#" onclick="installShortcut()" class="button">安装快捷指令</a>
+    <a href="shortcuts://import-shortcut?url=data:text/shortcut;base64,ewogICAgIldGV29ya2Zsb3dBY3Rpb25zIjogWwogICAgICAgIHsKICAgICAgICAgICAgIldGV29ya2Zsb3dBY3Rpb25JZGVudGlmaWVyIjogImlzLndvcmtmbG93LmFjdGlvbnMuZ2V0dGV4dCIsCiAgICAgICAgICAgICJXRldvcmtmbG93QWN0aW9uUGFyYW1ldGVycyI6IHsKICAgICAgICAgICAgICAgICJXRlRleHRBY3Rpb25UZXh0IjogIuiOt+WPluivremfs+i+k+WFpSIKICAgICAgICAgICAgfQogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgICAiV0ZXb3JrZmxvd0FjdGlvbklkZW50aWZpZXIiOiAiaXMud29ya2Zsb3cuYWN0aW9ucy5kb3dubG9hZHVybCIsCiAgICAgICAgICAgICJXRldvcmtmbG93QWN0aW9uUGFyYW1ldGVycyI6IHsKICAgICAgICAgICAgICAgICJ1cmwiOiAiaHR0cHM6Ly9hcGkuZGVlcHNlZWsuYWkvdjEvY2hhdC9jb21wbGV0aW9ucyIsCiAgICAgICAgICAgICAgICAibWV0aG9kIjogIlBPU1QiLAogICAgICAgICAgICAgICAgImhlYWRlcnMiOiB7CiAgICAgICAgICAgICAgICAgICAgIkNvbnRlbnQtVHlwZSI6ICJhcHBsaWNhdGlvbi9qc29uIiwKICAgICAgICAgICAgICAgICAgICAiQXV0aG9yaXphdGlvbiI6ICJCZWFyZXIgc2stMjg0OGViYjg2YzFlNDlhNGFjODg1NDQ5ODAyMWZkMTUiCiAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgImJvZHkiOiB7CiAgICAgICAgICAgICAgICAgICAgIm1vZGVsIjogImRlZXBzZWVrLWNoYXQtdjEiLAogICAgICAgICAgICAgICAgICAgICJtZXNzYWdlcyI6IFsKICAgICAgICAgICAgICAgICAgICAgICAgewogICAgICAgICAgICAgICAgICAgICAgICAgICAgInJvbGUiOiAidXNlciIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiY29udGVudCI6ICJ7e1dGVGV4dEFjdGlvblRleHR9fSIKICAgICAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgIF0sCiAgICAgICAgICAgICAgICAgICAgInRlbXBlcmF0dXJlIjogMC43CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICAgIldGV29ya2Zsb3dBY3Rpb25JZGVudGlmaWVyIjogImlzLndvcmtmbG93LmFjdGlvbnMuZ2V0dmFsdWVmb3JrZXkiLAogICAgICAgICAgICAiV0ZXb3JrZmxvd0FjdGlvblBhcmFtZXRlcnMiOiB7CiAgICAgICAgICAgICAgICAiV0ZEaWN0aW9uYXJ5S2V5IjogImNob2ljZXMuMC5tZXNzYWdlLmNvbnRlbnQiCiAgICAgICAgICAgIH0KICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICAgIldGV29ya2Zsb3dBY3Rpb25JZGVudGlmaWVyIjogImlzLndvcmtmbG93LmFjdGlvbnMuc3BlYWt0ZXh0IgogICAgICAgIH0KICAgIF0sCiAgICAiV0ZXb3JrZmxvd05hbWUiOiAiRGVlcFNlZWvliqjmiJHliqjmiJEiLAogICAgIldGV29ya2Zsb3dJY29uIjogewogICAgICAgICJXRldvcmtmbG93SWNvbkdseXBoTnVtYmVyIjogNTk1MTEsCiAgICAgICAgIldGV29ya2Zsb3dJY29uU3RhcnRDb2xvciI6IDQyODI2MDE5ODMKICAgIH0KfQ==" class="button">安装快捷指令</a>
 </body>
 </html>
