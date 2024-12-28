@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DeepSeek Shortcut Installer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #007AFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+    <script>
+        function installShortcut() {
+            var shortcutData = {
+                "WFWorkflowActions": [
+                    {
+                        "WFWorkflowActionIdentifier": "is.workflow.actions.gettext",
+                        "WFWorkflowActionParameters": {
+                            "WFTextActionText": "获取语音输入"
+                        }
+                    },
+                    {
+                        "WFWorkflowActionIdentifier": "is.workflow.actions.downloadurl",
+                        "WFWorkflowActionParameters": {
+                            "url": "https://api.deepseek.ai/v1/chat/completions",
+                            "method": "POST",
+                            "headers": {
+                                "Content-Type": "application/json",
+                                "Authorization": "Bearer sk-2848ebb86c1e49a4ac8854498021fd15"
+                            },
+                            "body": {
+                                "model": "deepseek-chat-v1",
+                                "messages": [
+                                    {
+                                        "role": "user",
+                                        "content": "{{WFTextActionText}}"
+                                    }
+                                ],
+                                "temperature": 0.7
+                            }
+                        }
+                    },
+                    {
+                        "WFWorkflowActionIdentifier": "is.workflow.actions.getvalueforkey",
+                        "WFWorkflowActionParameters": {
+                            "WFDictionaryKey": "choices.0.message.content"
+                        }
+                    },
+                    {
+                        "WFWorkflowActionIdentifier": "is.workflow.actions.speaktext"
+                    }
+                ],
+                "WFWorkflowName": "DeepSeek助手",
+                "WFWorkflowIcon": {
+                    "WFWorkflowIconGlyphNumber": 59511,
+                    "WFWorkflowIconStartColor": 4282601983
+                }
+            };
+            
+            var base64Data = btoa(JSON.stringify(shortcutData));
+            window.location.href = "shortcuts://import-shortcut?url=data:text/shortcut;base64," + base64Data;
+        }
+    </script>
+</head>
+<body>
+    <h1>DeepSeek 快捷指令安装</h1>
+    <p>点击下面的按钮安装 DeepSeek 语音助手快捷指令</p>
+    <a href="#" onclick="installShortcut()" class="button">安装快捷指令</a>
+</body>
+</html>
